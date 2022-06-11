@@ -51,10 +51,32 @@ $(function() {
             processData: false,
             data: formData,
             success: function(data, status, xhr) {
-                console.log(data);
+               if(xhr.status === 200)
+               {
+                   Swal.fire({
+                       title:"Success!",
+                       text:data.Message,
+                       icon:"success"
+                   }).then(res => {
+                        location.reload();
+                   });
+               }
+
+             
+              
+          
 
             },
             error: function(xhr, txtsTatus, errMsg) {
+                console.log(xhr);
+                if(xhr.status === 409)
+               {
+                Swal.fire({
+                       title:"Warning",
+                       text:xhr.responseJSON.Message,
+                       icon:"warning"
+                   });
+               }
 
             }
         });

@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "jquery": "^3.6.0",
-        "jquery-validation": "^1.19.4"
+        "jquery-validation": "^1.19.4",
+        "sweetalert2": "^11.4.17"
     }
 }

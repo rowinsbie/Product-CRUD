@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductFile;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 class ProductController extends Controller
@@ -36,21 +37,47 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        //check if product name already exists
+        $product_name = strtolower(ucwords($request['prod_name']));
+        $isExists = Product::where('product_name',$product_name)->exists();
+        if($isExists)
+        {
+            return Response()->json([
+                'Message'=>$product_name . ' is already exists'
+            ],409);
+        }
+        // File uploading
+        $file = $request->file('img');
+        $ext = $file->getClientOriginalExtension();
+        $fileName = $file->hashName();
+        $isUploaded = $file->storeAs('public/products/',$fileName);
+        if(!$isUploaded)
+        {
+            return Response()->json([
+                'Message'=>"We've encountered an error during the uploading of your file"
+            ],500);
+        }
+      
+
+        // once the file has been uploaded successfully
+        // The system wiull save the product information to the products table in the database
+
         $newProduct = Product::create([
-            'product_name'=>$request['prod_name'],
+            'product_name'=>$product_name,
             'unit'=>$request['unit'],
             'price'=>$request['price'],
             'expiration_date'=>date('Y/m/d',strtotime($request['exp'])),
             'available_inventory'=>$request['ai'],
-            'image'=>$request['img']
+            'image'=>$fileName
         ]);
+
 
         return Response()->json([
             'Message'=>"New Product has been created",
             'Product'=>$newProduct
         ],200);
 
-      
+         
       
     }
 
