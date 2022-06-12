@@ -41,7 +41,30 @@ $(function() {
 
     const createNewProduct = (formID) => {
         let formData = new FormData($(formID)[0]);
-        formData.append('img', $('input[type=file]')[0].files[0]); 
+        let file = $('input[type=file]')[0].files[0];
+        let ext =  $("#img").val().replace(/^.*\./,'').toLowerCase();
+        let allowedExt = ['jpg','png'];
+        if(!allowedExt.includes(ext))
+        {
+            Swal.fire({
+                title:"Oooops!",
+                text:"Your file must type of jpg or png",
+                icon:"warning"
+            });
+            return false;
+        }
+        
+        formData.append('img', file); 
+        if(file.size > 2000000)
+        {
+            Swal.fire({
+                title:"Too large",
+                text:"The image you're uploading is too large",
+                icon:"warning"
+            });
+            return false;
+        }
+        
 
         $.ajax({
             url: "{{url('api/Products')}}",
