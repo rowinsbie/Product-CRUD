@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Response()->json(Product::orderBy('created_at', 'desc')->get());
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -89,7 +89,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+       
     }
 
     /**
