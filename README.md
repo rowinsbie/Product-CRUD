@@ -17,7 +17,7 @@ It's a simple CRUD web application developed using laravel with REST API integra
 
 <code>git clone https://github.com/rowinsbie/Product-CRUD.git</code>
 <p>After cloning the project, go to the project directory by running the command below</p>
-<code>cd jdte/</code>
+<code>cd Product-CRUD/</code>
 <p>Once you're already in the project directory, run the commands below</p>
 <code>composer install</code>
 <br /><code>npm install</code>
