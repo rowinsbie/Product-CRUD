@@ -6,7 +6,7 @@
 
 
     </div>
-
+<x-forms.update-product />
 </div>
 <script>
 $(function() {
@@ -34,8 +34,9 @@ $(function() {
 
                         </div>
                         <div class='col-lg-4 text-end'>
-                        <a href='#' class='text-primary'><i class="fa fa-edit"></i></a>
                         <input type='hidden' name='prodid' class='prodid' value='` + value.id + `' />
+
+                        <a href='#' class='text-primary update' data-bs-toggle="modal" data-bs-target="#update-form"><i class="fa fa-edit"></i></a>
      
                         <a href='#' class='text-danger delete'><i class="fa fa-trash"></i></a>
 
@@ -56,6 +57,27 @@ $(function() {
 
         }
     });
+
+    $("body").on("click",'a.update',function()
+    {   
+        let ProductID = $(this).parent().find("input[type='hidden']").val();
+
+        $.ajax({
+            url:"{{url('api/Products')}}/"+ProductID,
+            type:"GET",
+            success:function(data,status,xhr)
+            {
+                $("#pid").val(data.Product.id);
+                $("#u_prod_name").val(data.Product.product_name);
+                $("#u_unit").val(data.Product.unit);
+                $("#u_price").val(data.Product.price);
+                $("#u_exp").val(data.Product.expiration_date);
+                $("#u_ai").val(data.Product.available_inventory);
+            }
+        })
+           
+    });
+
 
     $("body").on("click", 'a.delete', function() {
         let formID = $("#" + $(this).closest("form").attr('id')).serialize();

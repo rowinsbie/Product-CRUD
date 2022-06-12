@@ -87,9 +87,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-       
+        $product = Product::find($id);
+        return Response()->json([
+            'Message'=>"The product information has been loaded",
+            'Product'=>$product
+        ]);
     }
 
     /**
@@ -112,7 +116,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $isUpdated = $product::find($request['pid'])
+        ->update([
+            'product_name'=>$request['u_prod_name'],
+            'unit'=>$request['u_unit'],
+            'price'=>$request['u_price'],
+            'expiration_date'=>date('Y/m/d',strtotime($request['u_exp'])),
+            'available_inventory'=>$request['u_ai']
+        ]);
+        if($isUpdated)
+        {
+            return Response()->json([
+                'Message'=>"Product has been updated"
+            ],200);
+        }
     }
 
     /**
