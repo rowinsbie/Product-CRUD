@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/images/sc.PNG" width="400"></p>
+<p align="center"><img src="docs/images/sc.PNG" width="600"></p>
 
 
 ## Junior Dev Tech Exam
