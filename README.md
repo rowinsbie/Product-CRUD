@@ -15,6 +15,6 @@ It's a simple CRUD web application developed using laravel with REST API integra
 ## Installation
 <p>To start the installation, clone this repository to your local machine</p>
 
-<code>git clone </code>
+<code>git clone https://github.com/rowinsbie/Product-CRUD.git</code>
 <p>After cloning the project, go to the project directory by running the command below</p>
 <code>cd jdte/</code>
