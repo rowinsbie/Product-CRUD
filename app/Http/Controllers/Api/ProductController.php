@@ -121,8 +121,18 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $isDeleted = Product::find($id)->delete();
+        if(!$isDeleted)
+        {
+            return Response()->json([
+                'Message'=>"We have encountered an error during the deletion of the product"
+            ],500);
+        }
+
+        return Response()->json([
+            'Message'=>"The product has been deleted"
+        ],200);
     }
 }
