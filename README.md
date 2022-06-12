@@ -30,3 +30,24 @@ It's a simple CRUD web application developed using laravel with REST API integra
 <p align="center"><img src="docs/images/env_db.PNG" width="400"></p>
 <p>Generate APP_KEY with the command below</p>
 <code>php artisan key:generate</code>
+
+## Database creation
+<p>Before you run this command, please make sure you've created a database and the .env is configured.</p>
+<code>php artisan migrate</code>
+
+## Launch
+<p>To launch the application, run the command below</p>
+<code>php artisan serve</code>
+<p>go to your browser and paste url below</p>
+<code>http://127.0.0.1:8000/</code>
+<br /><br />
+<br />
+<br />
+<br />
+
+
+
+
+
+## Contact
+<p>Seiki Rowins Bie - seikirowins.bie.srb@gmail.com</p>
